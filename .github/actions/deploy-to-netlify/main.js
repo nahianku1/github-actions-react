@@ -15,26 +15,34 @@ async function run() {
       return new Promise((resolve, reject) => {
         exec(cmd, (error, stdout, stderr) => {
           if (error) {
+            console.error(`Error: ${error.message}`);
             reject(error);
-          } else if (stderr) {
-            console.error(stderr);
-            resolve(stdout);
           } else {
+            if (stderr) {
+              console.warn(`Warning: ${stderr}`);
+            }
             resolve(stdout);
           }
         });
       });
     };
 
-    // Run multiple commands sequentially using '&&'
-    const combinedCommands = `
-    npx netlify sites:create || true &&
-    npx netlify deploy --dir=${buildDir} --prod
-    `;
+    // Check if Netlify CLI is installed
+    await execCommand(`npm install -g netlify-cli`);
 
+    // Create Netlify site if not already created
+    console.log("Checking if Netlify site exists...");
+    try {
+      await execCommand(`npx netlify sites:list`);
+    } catch (siteError) {
+      console.log("Site does not exist. Creating a new site...");
+      await execCommand(`npx netlify sites:create`);
+    }
+
+    // Deploy to Netlify
     console.log("Running deployment commands...");
-    const output = await execCommand(combinedCommands);
-    console.log(output);
+    const deployOutput = await execCommand(`npx netlify deploy --dir=${buildDir} --prod`);
+    console.log(deployOutput);
 
     console.log("Deployment to Netlify was successful.");
   } catch (error) {
