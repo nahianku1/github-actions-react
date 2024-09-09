@@ -1,12 +1,11 @@
-const core = require('@actions/core');
-const { exec } = require('child_process');
+const core = require("@actions/core");
+const { exec } = require("child_process");
 
 async function run() {
   try {
     // Get inputs from the action metadata
-    const authToken = core.getInput('auth_token');
-    const siteName = core.getInput('site_name');
-    const buildDir = core.getInput('build_directory') || 'build';
+    const authToken = core.getInput("auth_token");
+    const buildDir = core.getInput("build_directory") || "dist";
 
     // Set environment variables for Netlify CLI
     process.env.NETLIFY_AUTH_TOKEN = authToken;
@@ -29,15 +28,19 @@ async function run() {
 
     // Run multiple commands sequentially using '&&'
     const combinedCommands = `
-      ${siteName ? `npx netlify sites:create --name ${siteName} || true` : 'npx netlify sites:create || true'} &&
+      ${
+        siteName
+          ? `npx netlify sites:create --name ${siteName} || true`
+          : "npx netlify sites:create || true"
+      } &&
       npx netlify deploy --dir=${buildDir} --prod
     `;
 
-    console.log('Running deployment commands...');
+    console.log("Running deployment commands...");
     const output = await execCommand(combinedCommands);
     console.log(output);
 
-    console.log('Deployment to Netlify was successful.');
+    console.log("Deployment to Netlify was successful.");
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);
   }
