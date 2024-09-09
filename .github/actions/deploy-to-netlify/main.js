@@ -31,7 +31,7 @@ async function run() {
     };
 
     try {
-      siteName = await execCommand(`netlify sites:creates --name ${siteName}`);
+      siteName = await execCommand(`netlify sites:create --name=${siteName}`);
       console.log(siteName);
     } catch (siteError) {
       console.log("Site does not exist. Creating a new site...");
