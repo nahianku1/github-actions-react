@@ -19,6 +19,6 @@ jobs:
       - name: Deploy artifacts
         uses: ./.github/actions/deploy-to-netlify
         with:
-          auth_token: nfp_ecvRd2VWx1Ls62KrsVxXQvkdy1YCwBUwad83
+          auth_token: ${{secrets.NETLIFY_TOKEN}}
           build_directory: dist
-          site_name: shimmering-monstera-e987f0
+          site_name: dancing-pastelito-9838b7

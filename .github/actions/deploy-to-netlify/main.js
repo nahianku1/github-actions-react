@@ -1,7 +1,6 @@
 const core = require("@actions/core");
 const { exec } = require("@actions/exec");
 
-
 async function run() {
   try {
     // Get inputs from the action metadata
@@ -9,8 +8,6 @@ async function run() {
     const buildDir = core.getInput("build_directory");
     const siteName = core.getInput("site_name");
 
-
-    
     // Set environment variables for Netlify CLI
     process.env.NETLIFY_AUTH_TOKEN = authToken;
 
@@ -31,7 +28,6 @@ async function run() {
       });
     };
 
-   
     // Deploy to Netlify
     console.log("Running deployment commands...");
     const deployOutput = await execCommand(
