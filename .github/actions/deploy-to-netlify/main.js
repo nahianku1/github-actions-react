@@ -6,8 +6,7 @@ async function run() {
     // Get inputs from the action metadata
     const authToken = core.getInput("auth_token");
     const buildDir = core.getInput("build_directory");
-    const siteName = core.getInput("site_name");
-    const team = core.getInput("team");
+
 
     // Set environment variables for Netlify CLI
     process.env.NETLIFY_AUTH_TOKEN = authToken;
@@ -30,9 +29,10 @@ async function run() {
     };
 
     try {
-      await execCommand(
-        `npx netlify sites:create --team=${team} --name=${siteName}`
+      siteName = await execCommand(
+        `netlify link`
       );
+      console.log(siteName);
     } catch (siteError) {
       console.log("Site does not exist. Creating a new site...");
     }
@@ -40,7 +40,7 @@ async function run() {
     // Deploy to Netlify
     console.log("Running deployment commands...");
     const deployOutput = await execCommand(
-      `npx netlify deploy --dir=${buildDir} --auth $NETLIFY_AUTH_TOKEN --site=${siteName} --prod`
+      `netlify deploy --dir=${buildDir} --auth $NETLIFY_AUTH_TOKEN --site=${siteName} --prod`
     );
     console.log(deployOutput);
 
