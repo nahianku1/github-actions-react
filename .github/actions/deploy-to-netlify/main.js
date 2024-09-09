@@ -28,7 +28,7 @@ async function run() {
 
     // Run multiple commands sequentially using '&&'
     const combinedCommands = `
-   "npx netlify sites:create || true" &&
+   npx netlify sites:create || true &&
     npx netlify deploy --dir=${buildDir} --prod
     `;
 
