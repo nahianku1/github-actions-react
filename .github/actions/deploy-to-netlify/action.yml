@@ -6,8 +6,14 @@ inputs:
     required: true
   build_directory:
     description: "The directory containing the build files"
-    default: "dist"
-    required: false
+    required: true
+  site_name:
+    description: This is used for site name
+    required: true
+  team:
+    description: This is used for team name
+    required: true
+
 runs:
   using: "node16"
   main: "main.js"

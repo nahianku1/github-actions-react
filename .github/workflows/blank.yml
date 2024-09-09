@@ -20,5 +20,6 @@ jobs:
         uses: ./.github/actions/deploy-to-netlify
         with:
           auth_token: nfp_ecvRd2VWx1Ls62KrsVxXQvkdy1YCwBUwad83
-
-  
+          build_directory: dist
+          site_name: reactapp-3434
+          team: nahianku1
