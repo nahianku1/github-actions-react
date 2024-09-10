@@ -17,7 +17,7 @@ async function run() {
     if (err) {
       core.setFailed(err.message);
     } else if (stderr) {
-      console.log(stderr);
+      core.setFailed(stderr);
     } else {
       console.log(stdout);
     }
