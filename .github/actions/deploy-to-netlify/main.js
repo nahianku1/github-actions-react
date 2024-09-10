@@ -31,7 +31,7 @@ async function run() {
     // Deploy to Netlify
     console.log("Running deployment commands...");
     const deployOutput = await execCommand(
-      `npm ci && npm run build && netlify deploy --dir=${buildDir} --site=${siteName} --prod`
+      `netlify deploy --dir=${buildDir} --site=${siteName} --prod`
     );
     console.log(deployOutput);
     console.log(process.env.NETLIFY_AUTH_TOKEN);
