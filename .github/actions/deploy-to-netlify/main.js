@@ -28,13 +28,21 @@ async function run() {
       });
     };
 
+     // Install Dependencies
+     console.log("Installing Dependencies...");
+     await execCommand(`npm cli`);
+ 
+     // Building artifacts
+     console.log("Building artifacts...");
+     const createSiteOutput = await execCommand(`npm run build`);
+     console.log(createSiteOutput);
+
     // Deploy to Netlify
     console.log("Running deployment commands...");
     const deployOutput = await execCommand(
       `netlify deploy --dir=${buildDir} --site=${siteName} --prod`
     );
     console.log(deployOutput);
-    console.log(process.env.NETLIFY_AUTH_TOKEN);
 
     console.log("Deployment to Netlify was successful.");
   } catch (error) {
