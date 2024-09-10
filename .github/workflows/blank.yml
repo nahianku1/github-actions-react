@@ -16,9 +16,14 @@ jobs:
         run: npm ci
       - name: Build artifacts
         run: npm run build
-      - name: Deploy artifacts
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Netlify
         uses: ./.github/actions/deploy-to-netlify
         with:
           auth_token: ${{secrets.NETLIFY_TOKEN}}
-          build_directory: dist
           site_name: dancing-pastelito-9838b7
+          token: ${{secrets.GITHUB_TOKEN}}
