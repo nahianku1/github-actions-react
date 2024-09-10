@@ -37,7 +37,7 @@ async function run() {
     // Deploy to Netlify
     console.log("Deploying to Netlify...");
     const deployOutput = await execCommand(
-      `npx netlify deploy --dir=${buildDir} --site=${siteName} --prod`
+      `npx netlify deploy --dir=dist --site=${siteName} --prod`
     );
     console.log(deployOutput);
 
