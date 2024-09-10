@@ -3,15 +3,25 @@ const { exec } = require("@actions/exec");
 const { getOctokit, context } = require("@actions/github");
 
 async function run() {
-    const token = core.getInput("token");
+  const token = core.getInput("token");
 
-    const octokit = getOctokit(token);
+  const octokit = getOctokit(token);
 
-    const { actor, repo } = context;
+  const {
+    repo: { owner, repo },
+  } = context;
 
-    console.log({actor, repo});
+  console.log({ owner, repo });
 
-   
+  exec(`ls -la && npm ci && npm run build`, (err, stdout, stderr) => {
+    if (err) {
+      core.setFailed(err.message);
+    } else if (stderr) {
+      console.log(stderr);
+    } else {
+      console.log(stdout);
+    }
+  });
 }
 
 run();
