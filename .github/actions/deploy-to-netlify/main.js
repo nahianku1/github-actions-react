@@ -30,7 +30,7 @@ async function run() {
 
      // Install Dependencies
      console.log("Installing Dependencies...");
-     await execCommand(`npm cli`);
+     await execCommand(`npm ci`);
  
      // Building artifacts
      console.log("Building artifacts...");
