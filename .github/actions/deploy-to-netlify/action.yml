@@ -4,11 +4,11 @@ inputs:
   auth_token:
     description: "Netlify authentication token"
     required: true
+  build_directory:
+    description: "The directory containing the build files"
+    required: true
   site_name:
     description: This is used for site name
-    required: true
-  token: 
-    description: This is used for github authentication
     required: true
 
 
