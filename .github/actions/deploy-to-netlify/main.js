@@ -25,6 +25,8 @@ async function run() {
     execSync(`netlify deploy --dir=${buildDir} --site=${siteName} --prod`);
 
     console.log("Deployment to Netlify was successful.");
+    const url = `${siteName}.netlify.app`;
+    core.setOutput("live-url", url);
   } catch (error) {
     core.setFailed(`Action failed with error: ${error.message}`);
   }

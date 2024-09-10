@@ -24,7 +24,10 @@ jobs:
       - name: Get code
         uses: actions/checkout@v3
       - name: Deploy to Netlify
+        id: deploy
         uses: ./.github/actions/deploy-to-netlify
         with:
           auth_token: ${{secrets.NETLIFY_TOKEN}}
           site_name: dancing-pastelito-9838b7
+      - name: Output URL
+        run: echo "${{steps.deploy.outputs.live-url}}" 

@@ -1,8 +1,6 @@
 
 function App() {
-  return (
-    <div>App Live Again.</div>
-  )
+  return <div>This is coming from CI/CD</div>;
 }
 
 export default App

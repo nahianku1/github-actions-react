@@ -12,6 +12,9 @@ inputs:
     description: This is used for site name
     required: true
 
+outputs:
+  live-url:
+    description: This is the live URL for the site
 
 runs:
   using: "node16"
