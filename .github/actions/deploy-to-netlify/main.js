@@ -1,19 +1,19 @@
 const core = require("@actions/core");
 const { exec } = require("@actions/exec");
-const { getOctokit, context } = require("@actions/github");
 
 async function run() {
-  const token = core.getInput("token");
+  try {
+    const authToken = core.getInput("auth_token");
+    const siteName = core.getInput("site_name");
 
-  const octokit = getOctokit(token);
+    process.env.NETLIFY_AUTH_TOKEN = authToken;
 
-  const {
-    repo: { owner, repo },
-  } = context;
-
-  console.log({ owner, repo });
-
-  exec(`pwd && ls -la && npm ci && npm run build`);
+    exec(
+      `npm ci && npm run build && npx netlify deploy --dir=dist --site=${siteName} --prod`
+    );
+  } catch (error) {
+    core.setFailed(error.message);
+  }
 }
 
 run();
