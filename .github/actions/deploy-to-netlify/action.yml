@@ -6,7 +6,8 @@ inputs:
     required: true
   build_directory:
     description: "The directory containing the build files"
-    required: true
+    default: 'dist'
+    required: false
   site_name:
     description: This is used for site name
     required: true

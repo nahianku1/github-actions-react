@@ -18,6 +18,7 @@ async function run() {
     // Building artifacts
     console.log("Building artifacts...");
     const createSiteOutput = execSync(`npm run build`);
+    console.log(createSiteOutput);
 
     // Deploy to Netlify
     console.log("Running deployment commands...");
