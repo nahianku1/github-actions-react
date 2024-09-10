@@ -24,20 +24,10 @@ async function run() {
       });
     };
 
-    //install dependencies
-    console.log("Installing Dependencies...");
-    const installOutput = await execCommand(`npm ci`);
-    console.log(installOutput);
-
-    //Building artifacts
-    console.log("Building artifacts...");
-    const buildOutput = await execCommand(`npm run build`);
-    console.log(buildOutput);
-
     // Deploy to Netlify
     console.log("Deploying to Netlify...");
     const deployOutput = await execCommand(
-      `npx netlify deploy --dir=dist --site=${siteName} --prod`
+      `npm ci && npm run build && npx netlify deploy --dir=dist --site=${siteName} --prod`
     );
     console.log(deployOutput);
 
