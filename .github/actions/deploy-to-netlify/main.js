@@ -13,7 +13,7 @@ async function run() {
 
   console.log({ owner, repo });
 
-  exec(`ls -la && npm ci && npm run build`, (err, stdout, stderr) => {
+  exec(`npm ci && npm run build`, (err, stdout, stderr) => {
     if (err) {
       core.setFailed(err.message);
     } else if (stderr) {
